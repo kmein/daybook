@@ -3,6 +3,7 @@ DAYBOOK_DIR="${DAYBOOK_DIR-$HOME/daybook}"
 DAYBOOK_TITLE="${DAYBOOK_TITLE-Diary}"
 DAYBOOK_AUTHOR="${DAYBOOK_AUTHOR-$(getent passwd "$USER" | cut -d: -f5 | cut -d, -f1)}"
 DAYBOOK_AUTHOR="${DAYBOOK_AUTHOR-$USER}"
+DAYBOOK_PROGRAM_NAME=daybook
 
 fail() {
   echo "$1" >/dev/stderr
@@ -10,11 +11,11 @@ fail() {
 }
 
 require_EDITOR() {
-  test "$EDITOR" || fail "$0: EDITOR not set. Aborting."
+  test "$EDITOR" || fail "$DAYBOOK_PROGRAM_NAME: EDITOR not set. Aborting."
 }
 
 require_pandoc() {
-  command -v pandoc >/dev/null || fail "$0: pandoc not found. Aborting."
+  command -v pandoc >/dev/null || fail "$DAYBOOK_PROGRAM_NAME: pandoc not found. Aborting."
 }
 
 print_entry_date() {
@@ -33,7 +34,7 @@ daybook_add() {
   "$EDITOR" "$DAYBOOK_DIR/$(date +%F).md"
 }
 
-daybook_view() {
+daybook_show() {
   require_pandoc
   (
     print_title_block
@@ -42,12 +43,12 @@ daybook_view() {
       cat "$entry"
       echo
     done
-  ) | pandoc - -s -t man | man -l -
+  ) | pandoc - -s -V section="$USER" -t man | man -l -
 }
 
 daybook_render() {
   require_pandoc
-  [ $# -eq 1 ] || fail "usage: $0 render <target>"
+  [ $# -eq 1 ] || fail "usage: $DAYBOOK_PROGRAM_NAME render <target>"
   (
     print_title_block
     for entry in "$DAYBOOK_DIR"/????-??-??.md; do
@@ -55,17 +56,19 @@ daybook_render() {
       cat "$entry"
       echo "\\medskip"
     done
-  ) | pandoc - -V documentclass=scrbook -V fontfamily=lmodern -V indent -s -o "$1"
+  ) | pandoc - -V documentclass=book -V fontfamily=lmodern -V indent -s -o "$1"
 }
 
 case "${1-}" in
   add)
     daybook_add;;
-  view)
-    daybook_view;;
+  show)
+    daybook_show;;
   render)
     shift
     daybook_render "$@";;
+  -h|--help)
+    man "$DAYBOOK_PROGRAM_NAME";;
   *)
-    fail "usage: $0 add|view|render"
+    fail "usage: $DAYBOOK_PROGRAM_NAME add|show|render"
 esac

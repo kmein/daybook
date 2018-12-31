@@ -10,7 +10,7 @@ section: 1
 `daybook` - diary writing utility
 
 # SYNOPSIS
-`daybook add|view|render [file]`
+`daybook add|show|render`
 
 # DESCRIPTION
 None.
@@ -19,14 +19,14 @@ None.
 `add`
 : writes an entry for the current date.
 
-`view`
+`show`
 : displays all diary entries in a pager.
 
 `render <file>`
 : renders to a PDF file.
 
-# INPUT FILES
-None.
+`-h, --help`
+: shows this help screen.
 
 # ENVIRONMENT VARIABLES
 `DAYBOOK_DIR`
@@ -38,24 +38,9 @@ None.
 `DAYBOOK_AUTHOR`
 : the diarist's name (default: user's real name or `$USER`)
 
-# ASNYCHRONOUS EVENTS
-None.
-
-# STDOUT
-Not used.
-
-# STDERR
-The standard error shall be used only for diagnostic messages.
-
-# OUTPUT FILES
-None.
-
 # EXIT STATUS
 0
 : Successful completion.
 
 > 0
 : An invalid option was specified, or an error occurred.
-
-# CONSEQUENCES OF ERRORS
-Default.
