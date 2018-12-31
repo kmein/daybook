@@ -2,7 +2,7 @@
 title: daybook
 date: 31 December 2018
 header: Linux Reference Manual
-footer: Manual page daybook(1)
+footer: daybook
 section: 1
 ...
 

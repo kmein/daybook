@@ -1,1 +1,1 @@
-daybook.1.md
+src/daybook.1.md

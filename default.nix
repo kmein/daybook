@@ -1,7 +1,7 @@
 { stdenv, makeWrapper, pandoc }:
 stdenv.mkDerivation {
   name = "daybook";
-  src = ./.;
+  src = ./src;
   nativeBuildInputs = [ makeWrapper ];
   buildInputs = [ pandoc ];
   buildPhase = ''
