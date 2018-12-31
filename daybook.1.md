@@ -2,7 +2,7 @@
 title: daybook
 date: 31 December 2018
 header: Linux Reference Manual
-footer: doc
+footer: Manual page daybook(1)
 section: 1
 ...
 
@@ -13,7 +13,7 @@ section: 1
 `daybook add|show|render`
 
 # DESCRIPTION
-None.
+TODO
 
 # OPTIONS
 `add`
@@ -33,7 +33,7 @@ None.
 : the directory where all diary entries are stored (default: `$HOME/daybook`)
 
 `DAYBOOK_TITLE`
-: the title to render by (default: Diary)
+: the title to render by (default: "Diary")
 
 `DAYBOOK_AUTHOR`
 : the diarist's name (default: user's real name or `$USER`)
@@ -42,5 +42,5 @@ None.
 0
 : Successful completion.
 
-> 0
+1
 : An invalid option was specified, or an error occurred.
