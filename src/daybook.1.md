@@ -17,7 +17,7 @@ TODO
 
 # OPTIONS
 `add`
-: writes an entry for the current date.
+: opens your favourite editor with an entry for the current date.
 
 `show`
 : displays all diary entries in a pager.
@@ -37,6 +37,9 @@ TODO
 
 `DAYBOOK_AUTHOR`
 : the diarist's name (default: user's real name or `$USER`)
+
+`EDITOR`
+: your favourite editor
 
 # EXIT STATUS
 0

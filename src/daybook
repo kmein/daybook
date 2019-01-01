@@ -36,9 +36,10 @@ daybook_add() {
 
 daybook_show() {
   require_pandoc
+  pattern="${1-????-??-??}"
   (
     print_title_block
-    for entry in "$DAYBOOK_DIR"/????-??-??.md; do
+    for entry in "$DAYBOOK_DIR"/$pattern.md; do
       echo "# $(print_entry_date "$entry")"
       cat "$entry"
       echo
