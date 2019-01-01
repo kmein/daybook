@@ -10,14 +10,17 @@ section: 1
 `daybook` - diary writing utility
 
 # SYNOPSIS
-`daybook add|show|search|render`
+`daybook add|amend|show|search|render`
 
 # DESCRIPTION
 TODO
 
 # OPTIONS
 `add`
-: opens your favourite editor with an entry for the current date.
+: opens `EDITOR` with an entry for today.
+
+`amend`
+: opens `EDITOR` with an entry for yesterday.
 
 `show [pattern]`
 : displays all diary entries matching a pattern in a pager. (default: all)

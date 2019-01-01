@@ -34,6 +34,11 @@ daybook_add() {
   "$EDITOR" "$DAYBOOK_DIR/$(date +%F).md"
 }
 
+daybook_amend() {
+  require_EDITOR
+  "$EDITOR" "$DAYBOOK_DIR/$(date -d yesterday +%F).md"
+}
+
 daybook_show() {
   require_pandoc
   pattern="${1-????-??-??}"
@@ -69,6 +74,8 @@ daybook_render() {
 case "${1-}" in
   add)
     daybook_add;;
+  amend)
+    daybook_amend;;
   show)
     shift
     daybook_show "$@";;
@@ -81,5 +88,5 @@ case "${1-}" in
   -h|--help)
     man "$DAYBOOK_PROGRAM_NAME";;
   *)
-    fail "usage: $DAYBOOK_PROGRAM_NAME add|show|search|render"
+    fail "usage: $DAYBOOK_PROGRAM_NAME add|amend|show|search|render"
 esac
