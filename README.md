@@ -1,1 +1,0 @@
-src/daybook.1.md
