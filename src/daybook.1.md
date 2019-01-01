@@ -10,7 +10,7 @@ section: 1
 `daybook` - diary writing utility
 
 # SYNOPSIS
-`daybook add|show|render`
+`daybook add|show|search|render`
 
 # DESCRIPTION
 TODO
@@ -19,8 +19,11 @@ TODO
 `add`
 : opens your favourite editor with an entry for the current date.
 
-`show`
-: displays all diary entries in a pager.
+`show [pattern]`
+: displays all diary entries matching a pattern in a pager. (default: all)
+
+`search <pattern>`
+: searches all entries for a pattern.
 
 `render <file>`
 : renders to a PDF file.

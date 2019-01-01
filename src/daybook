@@ -47,29 +47,39 @@ daybook_show() {
   ) | pandoc - -s -V section="$USER" -t man | man -l -
 }
 
+daybook_search() {
+  test $# -eq 1 || fail "usage: $DAYBOOK_PROGRAM_NAME search <pattern>"
+  grep --color=always "$1" "$DAYBOOK_DIR"/*
+}
+
 daybook_render() {
   require_pandoc
-  [ $# -eq 1 ] || fail "usage: $DAYBOOK_PROGRAM_NAME render <target>"
+  test $# -eq 1 || fail "usage: $DAYBOOK_PROGRAM_NAME render <target>"
   (
     print_title_block
     for entry in "$DAYBOOK_DIR"/????-??-??.md; do
-      echo "\\marginpar{$(print_entry_date "$entry")}\\noindent"
+      echo "\\marginnote{\\sffamily $(print_entry_date "$entry")}\\noindent"
       cat "$entry"
-      echo "\\medskip"
+      echo "\\par\\medskip"
     done
-  ) | pandoc - -V documentclass=book -V fontfamily=lmodern -V indent -s -o "$1"
+  ) | pandoc - --pdf-engine=xelatex -s -o "$1" \
+    -V documentclass=book -V mainfont="Linux Libertine O" -V sansfont="Linux Biolinum O" -V header-includes="\\usepackage{marginnote}" -V indent
 }
 
 case "${1-}" in
   add)
     daybook_add;;
   show)
-    daybook_show;;
+    shift
+    daybook_show "$@";;
   render)
     shift
     daybook_render "$@";;
+  search)
+    shift
+    daybook_search "$@";;
   -h|--help)
     man "$DAYBOOK_PROGRAM_NAME";;
   *)
-    fail "usage: $DAYBOOK_PROGRAM_NAME add|show|render"
+    fail "usage: $DAYBOOK_PROGRAM_NAME add|show|search|render"
 esac
